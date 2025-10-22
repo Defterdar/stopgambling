@@ -21,7 +21,7 @@
     .bt.primary{background:linear-gradient(135deg,var(--brand),var(--accent));color:#fff}
     .bt.ghost{border-color:var(--accent2);color:var(--accent2)}
     .hero{padding:90px 0 40px;text-align:center}
-    .hero h1{font-size:clamp(36px,5vw,60px);line-height:1.1;margin:0 0 14px;background:linear-gradient(90deg,var(--brand),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+    .hero h1{font-size:clamp(36px,5vw,60px);line-height:1.15;margin:0 0 14px;background:linear-gradient(90deg,var(--brand),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;display: inline-block;padding-bottom: 6px}
     .hero p{max-width:720px;margin:0 auto;color:var(--muted);font-size:18px}
     .cta-row{margin-top:24px;display:flex;justify-content:center;gap:10px;flex-wrap:wrap}
     section{padding:50px 0}
@@ -30,6 +30,7 @@
     .card{background:var(--panel);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:18px}
     .kicker{color:var(--brand);font-size:13px;text-transform:uppercase;letter-spacing:.4px}
     .card h3{margin:6px 0 10px;color:var(--accent2)}
+    .gradient-text {background: linear-gradient(90deg, var(--brand), var(--accent2));-webkit-background-clip: text;-webkit-text-fill-color: transparent;line-height: 1.15;padding-bottom: 6px;display: inline-block;}
     footer{padding:40px 0;color:var(--muted);border-top:1px solid rgba(255,255,255,.05);text-align:center}
   </style>
   <script>
@@ -52,7 +53,7 @@
 
   <main>
     <section class="hero">
-      <h1>Stop Gamling — Tag kontrollen tilbage</h1>
+      <h1><span class="gradient-text">Stop Gamling — Tag kontrollen tilbage</span></h1>
       <p>Online gamling er ikke et fair spil. Det er designet til at fastholde dig. Her får du <strong>klare grunde</strong> til at sige stop, <strong>konkrete handlinger</strong> du kan tage på 5 minutter, og <strong>hjælp i Danmark</strong>, når du har brug for det.</p>
       <div class="cta-row">
         <a class="bt primary" href="/handlinger.html">Start 5‑minutters planen</a>
