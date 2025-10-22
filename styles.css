@@ -41,7 +41,20 @@ a:hover {
 .container {
   max-width: 1100px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 16px;
+}
+
+/* Mobile-first responsive padding */
+@media (min-width: 640px) {
+  .container {
+    padding: 0 20px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    padding: 0 24px;
+  }
 }
 
 /* Header Styles */
@@ -58,16 +71,19 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 14px 0;
+  padding: 12px 0;
+  flex-wrap: wrap;
+  gap: 12px;
 }
 
 .brand {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   font-weight: 800;
   letter-spacing: .3px;
   color: var(--accent2);
+  flex-shrink: 0;
 }
 
 .logo {
@@ -76,7 +92,7 @@ header {
   color: var(--accent2);
   font-weight: 900;
   white-space: nowrap;
-  font-size: 18px;
+  font-size: 16px;
   transition: color 0.2s ease;
 }
 
@@ -86,21 +102,61 @@ header {
 
 .links {
   display: flex;
-  gap: 10px;
+  gap: 6px;
   flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+/* Mobile navigation improvements */
+@media (max-width: 639px) {
+  .nav {
+    padding: 10px 0;
+  }
+  
+  .logo {
+    font-size: 14px;
+  }
+  
+  .links {
+    gap: 4px;
+    width: 100%;
+    justify-content: center;
+    margin-top: 8px;
+  }
+}
+
+@media (min-width: 640px) {
+  .nav {
+    padding: 14px 0;
+  }
+  
+  .logo {
+    font-size: 18px;
+  }
+  
+  .links {
+    gap: 10px;
+    width: auto;
+    margin-top: 0;
+  }
 }
 
 /* Button Styles */
 .bt {
-  padding: 12px 18px;
-  border-radius: 12px;
+  padding: 10px 14px;
+  border-radius: 10px;
   border: 2px solid transparent;
   display: inline-block;
   transition: all 0.3s ease;
   font-weight: 600;
-  font-size: 14px;
+  font-size: 13px;
   letter-spacing: 0.025em;
   text-decoration: none;
+  text-align: center;
+  min-height: 44px; /* Minimum touch target size */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .bt.primary {
@@ -132,21 +188,39 @@ header {
   text-decoration: none;
 }
 
+/* Mobile button improvements */
+@media (max-width: 639px) {
+  .bt {
+    padding: 12px 16px;
+    font-size: 12px;
+    border-radius: 8px;
+    min-width: 80px;
+  }
+}
+
+@media (min-width: 640px) {
+  .bt {
+    padding: 12px 18px;
+    font-size: 14px;
+    border-radius: 12px;
+  }
+}
+
 /* Main Content */
 main {
-  padding: 50px 0;
+  padding: 30px 0;
 }
 
 /* Hero Section */
 .hero {
-  padding: 90px 0 40px;
+  padding: 50px 0 30px;
   text-align: center;
 }
 
 .hero h1 {
-  font-size: clamp(36px, 5vw, 60px);
-  line-height: 1.15;
-  margin: 0 0 14px;
+  font-size: clamp(28px, 8vw, 60px);
+  line-height: 1.2;
+  margin: 0 0 16px;
   background: linear-gradient(90deg, var(--brand), var(--accent2));
   -webkit-background-clip: text;
   background-clip: text;
@@ -159,30 +233,101 @@ main {
   max-width: 720px;
   margin: 0 auto;
   color: var(--muted);
-  font-size: 18px;
+  font-size: 16px;
+  line-height: 1.6;
 }
 
 .cta-row {
   margin-top: 24px;
   display: flex;
   justify-content: center;
-  gap: 10px;
+  gap: 8px;
   flex-wrap: wrap;
+}
+
+/* Mobile main content improvements */
+@media (max-width: 639px) {
+  main {
+    padding: 20px 0;
+  }
+  
+  .hero {
+    padding: 30px 0 20px;
+  }
+  
+  .hero p {
+    font-size: 15px;
+    padding: 0 8px;
+  }
+  
+  .cta-row {
+    gap: 6px;
+    margin-top: 20px;
+  }
+}
+
+@media (min-width: 640px) {
+  main {
+    padding: 40px 0;
+  }
+  
+  .hero {
+    padding: 60px 0 30px;
+  }
+  
+  .hero p {
+    font-size: 17px;
+  }
+  
+  .cta-row {
+    gap: 10px;
+    margin-top: 24px;
+  }
+}
+
+@media (min-width: 1024px) {
+  main {
+    padding: 50px 0;
+  }
+  
+  .hero {
+    padding: 90px 0 40px;
+  }
+  
+  .hero p {
+    font-size: 18px;
+  }
 }
 
 /* Grid Layout */
 section {
-  padding: 50px 0;
+  padding: 30px 0;
 }
 
 .grid {
   display: grid;
-  gap: 18px;
+  gap: 16px;
 }
 
-@media (min-width: 900px) {
+@media (min-width: 640px) {
+  .grid {
+    gap: 18px;
+  }
+}
+
+@media (min-width: 768px) {
+  .grid-3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
   .grid-3 {
     grid-template-columns: repeat(3, 1fr);
+  }
+  
+  section {
+    padding: 50px 0;
   }
 }
 
@@ -190,9 +335,23 @@ section {
 .card {
   background: var(--panel);
   border: 1px solid rgba(255, 255, 255, .08);
-  border-radius: 16px;
-  padding: 18px;
+  border-radius: 12px;
+  padding: 16px;
   margin-bottom: 16px;
+}
+
+/* Mobile card improvements */
+@media (min-width: 640px) {
+  .card {
+    border-radius: 16px;
+    padding: 18px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .card {
+    padding: 20px;
+  }
 }
 
 .warning-card {
@@ -214,7 +373,7 @@ section {
 /* Typography */
 .kicker {
   color: var(--brand);
-  font-size: 13px;
+  font-size: 12px;
   text-transform: uppercase;
   letter-spacing: .4px;
   margin-bottom: 8px;
@@ -223,24 +382,32 @@ section {
 .card h3 {
   margin: 6px 0 10px;
   color: var(--accent2);
+  font-size: 18px;
+  line-height: 1.3;
 }
 
 h1 {
-  font-size: clamp(28px, 4.6vw, 44px);
+  font-size: clamp(24px, 6vw, 44px);
   background: linear-gradient(90deg, var(--brand), var(--accent2));
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  margin: 0 0 10px;
+  margin: 0 0 16px;
+  line-height: 1.2;
 }
 
 h2 {
   color: var(--accent2);
+  font-size: clamp(20px, 4vw, 28px);
+  line-height: 1.3;
+  margin: 0 0 16px;
 }
 
 h3 {
   color: var(--accent2);
-  margin-top: 24px;
+  margin-top: 20px;
+  font-size: clamp(16px, 3vw, 20px);
+  line-height: 1.3;
 }
 
 .gradient-text {
@@ -248,9 +415,40 @@ h3 {
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  line-height: 1.15;
+  line-height: 1.2;
   padding-bottom: 6px;
   display: inline-block;
+}
+
+/* Mobile typography improvements */
+@media (max-width: 639px) {
+  .kicker {
+    font-size: 11px;
+  }
+  
+  .card h3 {
+    font-size: 16px;
+  }
+  
+  body {
+    font-size: 15px;
+    line-height: 1.5;
+  }
+}
+
+@media (min-width: 640px) {
+  .kicker {
+    font-size: 13px;
+  }
+  
+  .card h3 {
+    font-size: 18px;
+  }
+  
+  body {
+    font-size: 16px;
+    line-height: 1.6;
+  }
 }
 
 /* Special Elements */
@@ -279,22 +477,95 @@ h3 {
 
 /* Lists */
 ul {
-  padding-left: 20px;
+  padding-left: 18px;
 }
 
 li {
-  margin: 8px 0;
+  margin: 6px 0;
   color: var(--muted);
+  line-height: 1.5;
 }
 
 li strong {
   color: var(--text);
 }
 
+ol {
+  padding-left: 18px;
+}
+
+ol li {
+  margin: 8px 0;
+}
+
+/* Mobile list improvements */
+@media (max-width: 639px) {
+  ul, ol {
+    padding-left: 16px;
+  }
+  
+  li {
+    margin: 4px 0;
+    font-size: 14px;
+  }
+}
+
+@media (min-width: 640px) {
+  ul, ol {
+    padding-left: 20px;
+  }
+  
+  li {
+    margin: 8px 0;
+  }
+}
+
 /* Footer */
 footer {
-  padding: 40px 0;
+  padding: 30px 0;
   color: var(--muted);
   border-top: 1px solid rgba(255, 255, 255, .05);
   text-align: center;
+  font-size: 14px;
+}
+
+@media (min-width: 640px) {
+  footer {
+    padding: 40px 0;
+    font-size: 15px;
+  }
+}
+
+/* Mobile-specific improvements */
+@media (max-width: 639px) {
+  /* Improve touch targets */
+  a {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+  
+  /* Better spacing for mobile */
+  .tip-categories {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  
+  .email-highlight {
+    padding: 12px;
+    font-size: 16px;
+    margin: 16px 0;
+  }
+  
+  /* Ensure readable text on mobile */
+  p {
+    font-size: 15px;
+    line-height: 1.5;
+  }
+  
+  /* Better mobile navigation spacing */
+  .warning-card, .contact-info {
+    padding: 14px;
+    margin: 16px 0;
+  }
 }
