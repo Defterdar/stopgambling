@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="da">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Stop Gamling – Tag kontrollen tilbage</title>
+  <meta name="description" content="En klar, ungdomsvenlig landingsside om online gamling: hvorfor det fanger, hvordan du stopper, og hvor du kan få hjælp i Danmark." />
+  <link rel="canonical" href="https://stopgamling.nu/" />
+  <style>
+    :root{--bg:#0d1117;--panel:#161b22;--text:#fefefe;--muted:#9da5b4;--brand:#f43f5e;--accent:#22d3ee;--accent2:#fbbf24}
+    *{box-sizing:border-box}html,body{margin:0;height:100%;scroll-behavior:smooth}
+    body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:linear-gradient(160deg,#0d1117 0%,#111827 100%);color:var(--text);line-height:1.6}
+    a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
+    .container{max-width:1100px;margin:0 auto;padding:0 20px}
+    header{position:sticky;top:0;background:rgba(13,17,23,.9);backdrop-filter:blur(8px);border-bottom:1px solid rgba(255,255,255,.05);z-index:50}
+    .nav{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+    .brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.3px;color:var(--accent2)}
+    .logo{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,var(--brand),var(--accent));display:grid;place-items:center;color:#fff;font-weight:900}
+    .links{display:flex;gap:10px;flex-wrap:wrap}
+    .bt{padding:10px 14px;border-radius:12px;border:2px solid transparent;display:inline-block}
+    .bt.primary{background:linear-gradient(135deg,var(--brand),var(--accent));color:#fff}
+    .bt.ghost{border-color:var(--accent2);color:var(--accent2)}
+    .hero{padding:90px 0 40px;text-align:center}
+    .hero h1{font-size:clamp(36px,5vw,60px);line-height:1.1;margin:0 0 14px;background:linear-gradient(90deg,var(--brand),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+    .hero p{max-width:720px;margin:0 auto;color:var(--muted);font-size:18px}
+    .cta-row{margin-top:24px;display:flex;justify-content:center;gap:10px;flex-wrap:wrap}
+    section{padding:50px 0}
+    .grid{display:grid;gap:18px}
+    @media(min-width:900px){.grid-3{grid-template-columns:repeat(3,1fr)}}
+    .card{background:var(--panel);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:18px}
+    .kicker{color:var(--brand);font-size:13px;text-transform:uppercase;letter-spacing:.4px}
+    .card h3{margin:6px 0 10px;color:var(--accent2)}
+    footer{padding:40px 0;color:var(--muted);border-top:1px solid rgba(255,255,255,.05);text-align:center}
+  </style>
+  <script>
+    document.addEventListener('DOMContentLoaded',function(){
+      document.addEventListener('keydown',function(e){ if(e.key==='Escape') location.href='https://www.wikipedia.org';});
+    });
+  </script>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <div class="brand"><div class="logo">⛔</div> Stop Gamling</div>
+      <nav class="links" aria-label="Navigation">
+        <a class="bt ghost" href="/hvorfor.html">Hvorfor</a>
+        <a class="bt ghost" href="/handlinger.html">Handlinger</a>
+        <a class="bt primary" href="/hjaelp.html">Få hjælp</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <h1>Stop Gamling — Tag kontrollen tilbage</h1>
+      <p>Online gamling er ikke et fair spil. Det er designet til at fastholde dig. Her får du <strong>klare grunde</strong> til at sige stop, <strong>konkrete handlinger</strong> du kan tage på 5 minutter, og <strong>hjælp i Danmark</strong>, når du har brug for det.</p>
+      <div class="cta-row">
+        <a class="bt primary" href="/handlinger.html">Start 5‑minutters planen</a>
+        <a class="bt ghost" href="/hvorfor.html">Lær hvorfor</a>
+        <a class="bt ghost" href="/hjaelp.html">Se hjælp</a>
+      </div>
+    </section>
+
+    <section class="container">
+      <div class="grid grid-3">
+        <article class="card">
+          <div class="kicker">Tricks de bruger</div>
+          <h3>Endeløs dopamin</h3>
+          <p>Tilfældige gevinster får hjernen til at tænke “måske næste gang”. Det er bevidst design.</p>
+        </article>
+        <article class="card">
+          <div class="kicker">Skjulte tab</div>
+          <h3>Småt bliver stort</h3>
+          <p>Små indsatser og hurtige top‑ups får forbruget til at snebolde, før du opdager det.</p>
+        </article>
+        <article class="card">
+          <div class="kicker">Unge som mål</div>
+          <h3>Reklamer overalt</h3>
+          <p>Influencere og spil‑lignende apps normaliserer betting for unge. Jo tidligere, jo sværere at stoppe.</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© <span id="y"></span> stopgamling.nu • Ingen cookies • <a href="/hjaelp.html">Få hjælp</a></p>
+  </footer>
+  <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
+</body>
+</html>
