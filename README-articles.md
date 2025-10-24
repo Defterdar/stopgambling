@@ -1,4 +1,4 @@
-# Article Management System for Stop Gambling
+# Article Management System for STOP GAMBLING NU
 
 ## 📁 Files Overview
 

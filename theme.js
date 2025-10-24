@@ -1,4 +1,4 @@
-// Theme management for Stop Gambling website
+// Theme management for STOP GAMBLING NU website
 (function() {
   'use strict';
   

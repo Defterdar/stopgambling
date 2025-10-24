@@ -1,4 +1,4 @@
-// Article management system for Stop Gambling
+// Article management system for STOP GAMBLING NU
 class ArticleManager {
   constructor() {
     this.articles = null;
