@@ -14,85 +14,10 @@
   <link rel="stylesheet" href="styles.css">
   <script src="theme.js"></script>
 
-  <style>
-    .expandable-section {
-      margin-bottom: 20px;
-    }
-    
-    .section-header {
-      cursor: pointer;
-      padding: 20px;
-      background: var(--panel);
-      border: 1px solid rgba(255,255,255,.08);
-      border-radius: 16px;
-      transition: all 0.3s ease;
-      position: relative;
-    }
-    
-    .section-header:hover {
-      background: rgba(255,255,255,0.05);
-      border-color: rgba(255,255,255,.15);
-    }
-    
-    .section-header h2 {
-      margin: 0;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    
-    .expand-icon {
-      font-size: 20px;
-      transition: transform 0.3s ease;
-      color: var(--accent);
-    }
-    
-    .section-header.expanded .expand-icon {
-      transform: rotate(180deg);
-    }
-    
-    .section-content {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.3s ease;
-      background: var(--panel);
-      border: 1px solid rgba(255,255,255,.08);
-      border-top: none;
-      border-radius: 0 0 16px 16px;
-    }
-    
-    .section-content.expanded {
-      max-height: 3000px;
-    }
-    
-    .section-content-inner {
-      padding: 0 20px 20px 20px;
-    }
-    
-    .section-summary {
-      color: var(--muted);
-      margin: 8px 0 0 0;
-      font-size: 14px;
-    }
-  </style>
-
   <script>
     document.addEventListener('DOMContentLoaded',function(){
       document.addEventListener('keydown',function(e){ if(e.key==='Escape') location.href='https://www.wikipedia.org';});
     });
-
-    function toggleSection(sectionNumber) {
-      const content = document.getElementById(`section-${sectionNumber}`);
-      const header = content.previousElementSibling;
-      
-      if (content.classList.contains('expanded')) {
-        content.classList.remove('expanded');
-        header.classList.remove('expanded');
-      } else {
-        content.classList.add('expanded');
-        header.classList.add('expanded');
-      }
-    }
   </script>
 </head>
 <body>
@@ -127,201 +52,43 @@
 
   <main class="container">
     <h1>5‑minutters planen</h1>
-    
-    <p style="color: var(--muted); text-align: center; margin-bottom: 40px;">
-      Klik på hver sektion for at udvide og se detaljerede instruktioner
-    </p>
 
-    <div class="expandable-section">
-      <div class="section-header" onclick="toggleSection(1)">
-        <h2>1) Blokér sider og apps <span class="expand-icon">▼</span></h2>
-        <p class="section-summary">Skab fysiske barrierer mellem dig og gambling-sider på alle dine enheder</p>
-      </div>
-      <div class="section-content" id="section-1">
-        <div class="section-content-inner">
-          <p>Det første skridt er at skabe fysiske barrierer mellem dig og gambling-sider. Selv 30 sekunder ekstra kan give dig tid til at tænke over beslutningen.</p>
-          
-          <h3 style="color:var(--accent);margin:16px 0 8px;">📱 iPhone/iPad (anbefalet metode)</h3>
-          <ol>
-            <li><strong>Gå til Indstillinger</strong> → Skærmtid</li>
-            <li><strong>Aktiver Skærmtid</strong> hvis ikke allerede gjort</li>
-            <li><strong>Tryk på</strong> "Indholds- og anonymitetsbegrænsninger"</li>
-            <li><strong>Slå begrænsninger til</strong> og sæt en PIN som en ven kender</li>
-            <li><strong>Gå til</strong> Webindhold → Begræns voksne hjemmesider</li>
-            <li><strong>Under "Tillad aldrig"</strong> indtast domæner som: bet365.dk, danske-spil.dk, unibet.dk</li>
-          </ol>
-          
-          <h3 style="color:var(--accent);margin:16px 0 8px;">🤖 Android</h3>
-          <ul>
-            <li><strong>Google Family Link:</strong> Download appen, opret barnekonto til dig selv, bloker "Gambling" kategori</li>
-            <li><strong>BlockSite app:</strong> Gratis app der blokerer specifikke hjemmesider og apps</li>
-            <li><strong>Router-niveau:</strong> Log ind på din router, aktiver "Parental Controls" og bloker gambling-kategorier</li>
-          </ul>
-          
-          <h3 style="color:var(--accent);margin:16px 0 8px;">🌐 DNS-filtre (virker på alle enheder)</h3>
-          <ul>
-            <li><strong>NextDNS (gratis):</strong> Opret konto på nextdns.io → Security → bloker "Gambling" → brug deres DNS-servere</li>
-            <li><strong>OpenDNS:</strong> Skift DNS til 208.67.222.222 og 208.67.220.220 → log ind på dashboard og aktiver gambling-blokering</li>
-            <li><strong>Fordel:</strong> Virker automatisk på WiFi hjemme og beskytter alle enheder</li>
-          </ul>
-          
-          <p style="color:var(--muted);font-style:italic;margin-top:16px;">💡 <strong>Pro-tip:</strong> Kombiner flere metoder for maksimal effekt. Brug DNS-filter hjemme + telefon-begrænsninger når du er ude.</p>
-        </div>
-      </div>
-    </div>
+    <section class="card">
+      <h2>1) Blokér sider og apps</h2>
+      <p>Det første skridt er at skabe fysiske barrierer mellem dig og gambling-sider. Selv 30 sekunder ekstra kan give dig tid til at tænke over beslutningen.</p>
+      
+      <h3 style="color:var(--accent);margin:16px 0 8px;">📱 iPhone/iPad (anbefalet metode)</h3>
+      <ol>
+        <li><strong>Gå til Indstillinger</strong> → Skærmtid</li>
+        <li><strong>Aktiver Skærmtid</strong> hvis ikke allerede gjort</li>
+        <li><strong>Tryk på</strong> "Indholds- og anonymitetsbegrænsninger"</li>
+        <li><strong>Slå begrænsninger til</strong> og sæt en PIN som en ven kender</li>
+        <li><strong>Gå til</strong> Webindhold → Begræns voksne hjemmesider</li>
+        <li><strong>Under "Tillad aldrig"</strong> indtast domæner som: bet365.dk, danske-spil.dk, unibet.dk</li>
+      </ol>
+      
+      <h3 style="color:var(--accent);margin:16px 0 8px;">🤖 Android</h3>
+      <ul>
+        <li><strong>Google Family Link:</strong> Download appen, opret barnekonto til dig selv, bloker "Gambling" kategori</li>
+        <li><strong>BlockSite app:</strong> Gratis app der blokerer specifikke hjemmesider og apps</li>
+        <li><strong>Router-niveau:</strong> Log ind på din router, aktiver "Parental Controls" og bloker gambling-kategorier</li>
+      </ul>
+      
+      <h3 style="color:var(--accent);margin:16px 0 8px;">🌐 DNS-filtre (virker på alle enheder)</h3>
+      <ul>
+        <li><strong>NextDNS (gratis):</strong> Opret konto på nextdns.io → Security → bloker "Gambling" → brug deres DNS-servere</li>
+        <li><strong>OpenDNS:</strong> Skift DNS til 208.67.222.222 og 208.67.220.220 → log ind på dashboard og aktiver gambling-blokering</li>
+        <li><strong>Fordel:</strong> Virker automatisk på WiFi hjemme og beskytter alle enheder</li>
+      </ul>
+      
+      <p style="color:var(--muted);font-style:italic;margin-top:16px;">💡 <strong>Pro-tip:</strong> Kombiner flere metoder for maksimal effekt. Brug DNS-filter hjemme + telefon-begrænsninger når du er ude.</p>
+    </section>
 
-    <div class="expandable-section">
-      <div class="section-header" onclick="toggleSection(2)">
-        <h2>2) Frys pengestrømmen <span class="expand-icon">▼</span></h2>
-        <p class="section-summary">Gør det sværere at overføre penge til gambling-sider ved at blokere betalingsmetoder</p>
-      </div>
-      <div class="section-content" id="section-2">
-        <div class="section-content-inner">
-          <p>Gambling-sider lever af hurtige, friktionsløse betalinger. Jo sværere det er at overføre penge, jo mere tid får du til at tænke dig om.</p>
-          
-          <h3 style="color:var(--accent);margin:16px 0 8px;">🏦 Bank-blokering (mest effektive)</h3>
-          <div style="background:rgba(34,211,238,0.1);padding:12px;border-left:3px solid var(--accent);margin:12px 0;">
-            <p style="margin:0;"><strong>Ring til din bank og sig:</strong></p>
-            <p style="margin:8px 0 0;font-style:italic;">"Jeg vil gerne blokere alle transaktioner til gambling-kategori. Det hedder MCC-kode 7995. Kan I sætte en permanent blokering på det?"</p>
-          </div>
-          
-          <h4 style="color:var(--text);margin:12px 0 6px;">📞 Bankernes kundeservice:</h4>
-          <ul>
-            <li><strong>Danske Bank:</strong> 70 12 34 56 (24/7)</li>
-            <li><strong>Nordea:</strong> 70 33 33 33</li>
-            <li><strong>Jyske Bank:</strong> 89 89 89 89</li>
-            <li><strong>Sydbank:</strong> 74 37 37 37</li>
-            <li><strong>Arbejdernes Landsbank:</strong> 38 48 48 48</li>
-            <li><strong>Nykredit Bank:</strong> 70 10 90 00</li>
-            <li><strong>Spar Nord Bank:</strong> 96 34 40 00</li>
-            <li><strong>Handelsbanken:</strong> 72 21 80 00</li>
-            <li><strong>Ringkjøbing Landbobank:</strong> 97 32 11 66</li>
-            <li><strong>Lån &amp; Spar Bank:</strong> 33 78 19 00</li>
-            <li><strong>Merkur Andelskasse:</strong> 70 11 26 00</li>
-            <li><strong>Vestjysk Bank:</strong> 96 63 20 00</li>
-            <li><strong>Sparekassen Danmark:</strong> 96 63 20 00</li>
-            <li><strong>Totalbanken:</strong> 63 19 90 00</li>
-            <li><strong>Djurslands Bank:</strong> 86 30 30 30</li>
-            <li><strong>Fynske Bank:</strong> 63 22 22 22</li>
-            <li><strong>Sparekassen Kronjylland:</strong> 89 12 24 00</li>
-          </ul>
-          
-          <p style="color:var(--muted);font-size:14px;margin:8px 0;"><strong>Hvad er MCC 7995?</strong> Merchant Category Code for gambling - alle betting-sider bruger denne kode når de trækker penge.</p>
-          
-          <h3 style="color:var(--accent);margin:16px 0 8px;">📱 Betalingsapps og tjenester</h3>
-          
-          <h4 style="color:var(--text);margin:12px 0 6px;">MobilePay:</h4>
-          <ol>
-            <li><strong>Åbn MobilePay</strong> → Indstillinger (tandhjul)</li>
-            <li><strong>Gå til</strong> "Kort og konti"</li>
-            <li><strong>Fjern alle kort</strong> eller sæt meget lave daglige grænser (f.eks. 50 kr.)</li>
-          </ol>
-          
-          <h4 style="color:var(--text);margin:12px 0 6px;">Apple Pay / Google Pay:</h4>
-          <ul>
-            <li><strong>iPhone:</strong> Indstillinger → Wallet & Apple Pay → fjern alle kort eller sæt begrænsninger</li>
-            <li><strong>Android:</strong> Google Pay app → Betaling → Betalingsmetoder → fjern kort</li>
-            <li><strong>Alternativ:</strong> Behold kun et kort med meget lav grænse til daglig brug</li>
-          </ul>
-          
-          <h4 style="color:var(--text);margin:12px 0 6px;">PayPal, Klarna, osv.:</h4>
-          <ul>
-            <li><strong>Fjern alle gemte betalingsmuligheder</strong> fra disse tjenester</li>
-            <li><strong>Slå automatisk påfyldning fra</strong> - tving dig selv til at indtaste kortoplysninger hver gang</li>
-            <li><strong>Sæt lave daglige grænser</strong> hvor det er muligt</li>
-          </ul>
-          
-          <h3 style="color:var(--accent);margin:16px 0 8px;">💳 Kreditkort og gemte kortoplysninger</h3>
-          
-          <h4 style="color:var(--text);margin:12px 0 6px;">Browser og gemte kort:</h4>
-          <ol>
-            <li><strong>Chrome:</strong> Indstillinger → Autofyldning → Betalingsmetoder → slet alle</li>
-            <li><strong>Safari:</strong> Præferencer → Autofyldning → Kreditkort → fjern alle</li>
-            <li><strong>Firefox:</strong> Indstillinger → Privatliv og sikkerhed → Formularer og autofyldning → gemte kort</li>
-            <li><strong>Edge:</strong> Indstillinger → Profiler → Betalingsoplysninger → slet</li>
-          </ol>
-          
-          <h4 style="color:var(--text);margin:12px 0 6px;">Gambling-apps på telefon:</h4>
-          <ul>
-            <li><strong>Åbn hver app</strong> du har brugt til gambling</li>
-            <li><strong>Gå til betalingsindstillinger</strong> og fjern alle gemte kort</li>
-            <li><strong>Slå auto-påfyldning fra</strong> hvis muligt</li>
-            <li><strong>Overvej at slette appen</strong> helt - du kan altid downloade igen hvis nødvendigt</li>
-          </ul>
-          
-          <h3 style="color:var(--accent);margin:16px 0 8px;">🛡️ Ekstra sikkerhedsforanstaltninger</h3>
-          <ul>
-            <li><strong>Overdrag dine kort til en ven/partner i 30 dage</strong> (kun hvis du stoler på dem)</li>
-            <li><strong>Brug kun kontanter</strong> i en periode - betal regninger via netbank på computer</li>
-            <li><strong>Sæt daglige hævelimiter</strong> på 200-300 kr. i din bank</li>
-            <li><strong>Aktiver SMS-notifikationer</strong> for alle transaktioner over 50 kr.</li>
-          </ul>
-          
-          <div style="background:rgba(244,63,94,0.1);padding:12px;border-radius:8px;margin-top:16px;">
-            <p style="margin:0;color:var(--brand);"><strong>⚠️ Vigtigt:</strong> Disse tiltag skal være svære at omgå. Bed en ven om hjælp til at sætte dem op, og giv ikke dig selv "nød-adgang".</p>
-          </div>
-          
-          <p style="color:var(--muted);font-style:italic;margin-top:16px;">💡 <strong>Husk:</strong> Målet er ikke at gøre det umuligt, men at skabe nok friktion til at du får tid til at tænke dig om før impulsbeslutninger.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="expandable-section">
-      <div class="section-header" onclick="toggleSection(3)">
-        <h2>3) Ansvarlighed <span class="expand-icon">▼</span></h2>
-        <p class="section-summary">Fortæl andre om din beslutning for at få støtte og gøre din plan reel</p>
-      </div>
-      <div class="section-content" id="section-3">
-        <div class="section-content-inner">
-          <p>At fortælle andre om din beslutning gør den real og giver dig støtte. Du behøver ikke dele detaljer - bare at du tager en pause.</p>
-          
-          <h3 style="color:var(--accent);margin:16px 0 8px;">👥 Vælg din støtteperson</h3>
-          <ul>
-            <li><strong>En tæt ven</strong> som du taler med regelmæssigt</li>
-            <li><strong>Familiemedlem</strong> som du stoler på og ikke dømmer</li>
-            <li><strong>Kæreste/partner</strong> hvis I har en åben kommunikation</li>
-            <li><strong>Kollega</strong> som du spiser frokost med ofte</li>
-          </ul>
-          
-          <h3 style="color:var(--accent);margin:16px 0 8px;">💬 Hvad skal du sige?</h3>
-          <div style="background:rgba(34,211,238,0.1);padding:12px;border-left:3px solid var(--accent);margin:12px 0;">
-            <p style="margin:0;"><strong>Eksempel på besked:</strong></p>
-            <p style="margin:8px 0 0;font-style:italic;">"Hej [navn]. Jeg har besluttet at holde pause fra gambling i 30 dage. Kan du hjælpe mig ved at spørge hvordan det går hver fredag? Det ville betyde meget for mig."</p>
-          </div>
-          
-          <h3 style="color:var(--accent);margin:16px 0 8px;">⏰ Sæt systematik op</h3>
-          <ol>
-            <li><strong>Kalender-påmindelser:</strong> Hver fredag kl. 19:00 - "Check ind med [navn] om gambling-pause"</li>
-            <li><strong>Ugentlig SMS:</strong> Send status til din støtteperson - bare "Uge 2/4 ✅" eller lignende</li>
-            <li><strong>Skriv det ned:</strong> Notér startdato og din motivation i telefonen eller på papir</li>
-            <li><strong>Fejr milepæle:</strong> Efter 1 uge, 2 uger, 1 måned - gør noget rart for dig selv</li>
-          </ol>
-          
-          <h3 style="color:var(--accent);margin:16px 0 8px;">🔄 Hvis du falder i</h3>
-          <ul>
-            <li><strong>Fortæl det straks</strong> til din støtteperson - ingen skam, bare genstart</li>
-            <li><strong>Analysér hvad der skete:</strong> Hvornår, hvor, hvilken følelse udløste det?</li>
-            <li><strong>Juster strategien:</strong> Skal du blokere flere sider? Fjerne flere betalingsmuligheder?</li>
-            <li><strong>Start forfra:</strong> Nye 30 dage begynder nu</li>
-          </ul>
-          
-          <div style="background:rgba(251,191,36,0.1);padding:12px;border-radius:8px;margin-top:16px;">
-            <p style="margin:0;color:var(--accent2);"><strong>💪 Husk:</strong> At søge hjælp er et tegn på styrke, ikke svaghed. Du tager kontrollen tilbage.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <p style="color:var(--muted); text-align: center; margin-top: 40px;">
-      Hvis noget af dette er svært, gå til <a href="/hjaelp.html">Hjælp</a> for gratis rådgivning.
-    </p>
-  </main>
-  <footer>
-    <p>© <span id="y"></span> stopgambling.nu • Ingen cookies • <a href="/hjaelp.html">Få hjælp</a> • <a href="/tip.html">Tip os</a></p>
-  </footer>
-  <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
-</body>
-</html>
+    <section class="card">
+      <h2>2) Frys pengestrømmen</h2>
+      <p>Gambling-sider lever af hurtige, friktionsløse betalinger. Jo sværere det er at overføre penge, jo mere tid får du til at tænke dig om.</p>
+      
+      <h3 style="color:var(--accent);margin:16px 0 8px;">🏦 Bank-blokering (mest effektive)</h3>
       <div style="background:rgba(34,211,238,0.1);padding:12px;border-left:3px solid var(--accent);margin:12px 0;">
         <p style="margin:0;"><strong>Ring til din bank og sig:</strong></p>
         <p style="margin:8px 0 0;font-style:italic;">"Jeg vil gerne blokere alle transaktioner til gambling-kategori. Det hedder MCC-kode 7995. Kan I sætte en permanent blokering på det?"</p>
@@ -443,11 +210,9 @@
       <div style="background:rgba(251,191,36,0.1);padding:12px;border-radius:8px;margin-top:16px;">
         <p style="margin:0;color:var(--accent2);"><strong>💪 Husk:</strong> At søge hjælp er et tegn på styrke, ikke svaghed. Du tager kontrollen tilbage.</p>
       </div>
-    </div>
+    </section>
 
-    <p style="color:var(--muted); text-align: center; margin-top: 40px;">
-      Hvis noget af dette er svært, gå til <a href="/hjaelp.html">Hjælp</a> for gratis rådgivning.
-    </p>
+    <p style="color:var(--muted)">Hvis noget af dette er svært, gå til <a href="/hjaelp.html">Hjælp</a> for gratis rådgivning.</p>
   </main>
   <footer>
     <p>© <span id="y"></span> stopgambling.nu • Ingen cookies • <a href="/hjaelp.html">Få hjælp</a> • <a href="/tip.html">Tip os</a></p>
