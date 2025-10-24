@@ -1,0 +1,47 @@
+// Theme management for Stop Gambling website
+(function() {
+  'use strict';
+  
+  function initTheme() {
+    // Check for saved theme preference or default to dark
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    setTheme(savedTheme);
+  }
+  
+  function toggleTheme() {
+    const currentTheme = document.documentElement.classList.contains('light-theme') ? 'light' : 'dark';
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    setTheme(newTheme);
+  }
+  
+  function setTheme(theme) {
+    const root = document.documentElement;
+    const sunIcon = document.querySelector('.sun-icon');
+    const moonIcon = document.querySelector('.moon-icon');
+    
+    if (theme === 'light') {
+      root.classList.add('light-theme');
+      if (sunIcon) sunIcon.style.display = 'none';
+      if (moonIcon) moonIcon.style.display = 'block';
+    } else {
+      root.classList.remove('light-theme');
+      if (sunIcon) sunIcon.style.display = 'block';
+      if (moonIcon) moonIcon.style.display = 'none';
+    }
+    
+    // Save theme preference
+    localStorage.setItem('theme', theme);
+  }
+  
+  // Initialize theme immediately when script loads (before DOM ready)
+  initTheme();
+  
+  // Initialize when DOM is ready
+  document.addEventListener('DOMContentLoaded', function() {
+    initTheme(); // Ensure icons are updated after DOM is loaded
+  });
+  
+  // Make functions globally available
+  window.toggleTheme = toggleTheme;
+  window.setTheme = setTheme;
+})();

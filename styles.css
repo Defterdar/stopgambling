@@ -1,5 +1,6 @@
 /* Stop Gambling - Shared Styles */
 :root {
+  /* Dark theme (default) */
   --bg: #0d1117;
   --panel: #161b22;
   --text: #fefefe;
@@ -10,6 +11,20 @@
   --calm-primary: #6b7280;
   --calm-secondary: #8b9dc3;
   --calm-accent: #a78bfa;
+}
+
+/* Light theme */
+:root.light-theme {
+  --bg: #ffffff;
+  --panel: #f8fafc;
+  --text: #1f2937;
+  --muted: #6b7280;
+  --brand: #dc2626;
+  --accent: #0ea5e9;
+  --accent2: #d97706;
+  --calm-primary: #4b5563;
+  --calm-secondary: #6366f1;
+  --calm-accent: #8b5cf6;
 }
 
 * {
@@ -142,6 +157,53 @@ header {
     gap: 10px;
     width: auto;
     margin-top: 0;
+  }
+}
+
+/* Theme Toggle Styles */
+.theme-toggle {
+  background: transparent;
+  border: 2px solid var(--muted);
+  color: var(--muted);
+  border-radius: 8px;
+  padding: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 40px;
+  min-height: 40px;
+  margin-left: 8px;
+}
+
+.theme-toggle:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: rgba(34, 211, 238, 0.1);
+}
+
+.theme-toggle svg {
+  width: 18px;
+  height: 18px;
+  transition: transform 0.3s ease;
+}
+
+.theme-toggle:hover svg {
+  transform: rotate(180deg);
+}
+
+/* Mobile theme toggle */
+@media (max-width: 639px) {
+  .theme-toggle {
+    padding: 6px;
+    min-width: 36px;
+    min-height: 36px;
+  }
+  
+  .theme-toggle svg {
+    width: 16px;
+    height: 16px;
   }
 }
 
