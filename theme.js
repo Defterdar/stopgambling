@@ -16,17 +16,11 @@
   
   function setTheme(theme) {
     const root = document.documentElement;
-    const sunIcon = document.querySelector('.sun-icon');
-    const moonIcon = document.querySelector('.moon-icon');
     
     if (theme === 'light') {
       root.classList.add('light-theme');
-      if (sunIcon) sunIcon.style.display = 'none';
-      if (moonIcon) moonIcon.style.display = 'block';
     } else {
       root.classList.remove('light-theme');
-      if (sunIcon) sunIcon.style.display = 'block';
-      if (moonIcon) moonIcon.style.display = 'none';
     }
     
     // Save theme preference
