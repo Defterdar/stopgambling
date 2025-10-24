@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="da">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Admin - Tilføj artikler • Stop Gambling</title>
+  
+  <link rel="stylesheet" href="styles.css">
+  
+  <style>
+    .admin-form {
+      max-width: 800px;
+      margin: 0 auto;
+      background: var(--panel);
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 16px;
+      padding: 24px;
+    }
+    
+    .form-group {
+      margin-bottom: 20px;
+    }
+    
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: var(--accent2);
+    }
+    
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1px solid rgba(255,255,255,.2);
+      border-radius: 8px;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 14px;
+      font-family: inherit;
+    }
+    
+    .form-group textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+    
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 2px rgba(34, 211, 238, 0.1);
+    }
+    
+    .form-actions {
+      display: flex;
+      gap: 12px;
+      justify-content: flex-end;
+      margin-top: 30px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255,255,255,.1);
+    }
+    
+    .success-message {
+      background: rgba(34, 211, 238, 0.1);
+      border: 1px solid rgba(34, 211, 238, 0.3);
+      color: var(--accent);
+      padding: 12px 16px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      display: none;
+    }
+    
+    .error-message {
+      background: rgba(244, 63, 94, 0.1);
+      border: 1px solid rgba(244, 63, 94, 0.3);
+      color: var(--brand);
+      padding: 12px 16px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      display: none;
+    }
+    
+    .instructions {
+      background: rgba(251, 191, 36, 0.1);
+      border: 1px solid rgba(251, 191, 36, 0.3);
+      padding: 16px;
+      border-radius: 12px;
+      margin-bottom: 30px;
+    }
+    
+    .json-output {
+      background: var(--bg);
+      border: 1px solid rgba(255,255,255,.2);
+      border-radius: 8px;
+      padding: 16px;
+      margin-top: 20px;
+      font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+      font-size: 13px;
+      overflow-x: auto;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <div class="brand"><a href="/" class="logo"><svg width="30" height="30" viewBox="0 0 32 32" style="display: inline-block; margin-right: 8px; vertical-align: middle;"><circle cx="16" cy="16" r="15" fill="#ef4444"/><path d="M8 12 L12 8 L20 8 L24 12 L24 20 L20 24 L12 24 L8 20 Z" fill="#ffffff" opacity="0.9"/><line x1="10" y1="10" x2="22" y2="22" stroke="#ef4444" stroke-width="2" opacity="0.8"/></svg>Stop Gambling</a></div>
+      <nav class="links" aria-label="Navigation">
+        <a class="bt ghost" href="/presse.html">Tilbage til Presse</a>
+        <a class="bt ghost" href="/">Forside</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container" style="padding: 50px 0;">
+    <h1>Tilføj nye artikler</h1>
+    
+    <div class="instructions">
+      <h3>📝 Sådan tilføjer du artikler:</h3>
+      <ol>
+        <li>Udfyld formularen nedenfor med artikeloplysninger</li>
+        <li>Klik "Generer JSON" for at se den formaterede data</li>
+        <li>Kopier JSON-outputtet og tilføj det til <code>articles.json</code> filen</li>
+        <li>Gem filen og genindlæs pressesiden for at se den nye artikel</li>
+      </ol>
+      
+      <p><strong>Tip:</strong> Artikler vises i den rækkefølge de står i JSON-filen. Nye artikler skal placeres øverst for at vise som "seneste nyheder".</p>
+    </div>
+
+    <div class="admin-form">
+      <div class="success-message" id="success-msg">
+        Artikel JSON genereret! Kopier outputtet nedenfor til articles.json filen.
+      </div>
+      
+      <div class="error-message" id="error-msg">
+        Fejl: Udfyld venligst alle påkrævede felter.
+      </div>
+
+      <form id="article-form">
+        <div class="form-group">
+          <label for="article-type">Artikel type *</label>
+          <select id="article-type" required>
+            <option value="">Vælg type...</option>
+            <option value="nyheder">📰 Nyhed</option>
+            <option value="dokumenter">📄 Dokument/Regering</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="article-title">Titel *</label>
+          <input type="text" id="article-title" placeholder="F.eks. Forbud mod liveodds på bannere er med i ny spilaftale" required />
+        </div>
+
+        <div class="form-group">
+          <label for="article-date">Dato *</label>
+          <input type="date" id="article-date" required />
+        </div>
+
+        <div class="form-group">
+          <label for="article-source">Kilde *</label>
+          <input type="text" id="article-source" placeholder="F.eks. Ekstra Bladet, Spillemyndigheden, Skatteministeriet" required />
+        </div>
+
+        <div class="form-group">
+          <label for="article-summary">Sammendrag *</label>
+          <textarea id="article-summary" placeholder="Kort sammendrag af artiklen - dette vises på pressesiden" required></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="article-url">Link til artikel *</label>
+          <input type="url" id="article-url" placeholder="https://..." required />
+        </div>
+
+        <div class="form-actions">
+          <button type="button" class="bt ghost" onclick="clearForm()">Ryd formular</button>
+          <button type="submit" class="bt primary">Generer JSON</button>
+        </div>
+      </form>
+
+      <div id="json-output" class="json-output" style="display: none;"></div>
+    </div>
+
+    <div class="admin-form" style="margin-top: 40px;">
+      <h2>📁 Hurtig guide til articles.json</h2>
+      <p>Filen <code>articles.json</code> indeholder alle artikler struktureret sådan:</p>
+      <div class="json-output">
+{
+  "nyheder": [
+    {
+      "title": "Artikel titel",
+      "date": "2025-10-24",
+      "source": "Kilde navn",
+      "summary": "Artikel sammendrag...",
+      "url": "https://link-til-artikel"
+    }
+  ],
+  "dokumenter": [
+    // Samme struktur som nyheder
+  ]
+}
+      </div>
+      
+      <h3>💡 Tips:</h3>
+      <ul>
+        <li><strong>Tilføj nye artikler øverst</strong> i det relevante array (nyheder eller dokumenter)</li>
+        <li><strong>Husk komma</strong> efter hver artikel objekt (undtagen den sidste)</li>
+        <li><strong>Brug korrekt datoformat</strong>: YYYY-MM-DD (f.eks. 2025-10-24)</li>
+        <li><strong>Test altid</strong> at JSON syntaxen er korrekt efter redigering</li>
+      </ul>
+    </div>
+  </main>
+
+  <footer style="padding:40px 0;color:var(--muted);border-top:1px solid rgba(255,255,255,.05);text-align:center">
+    <div class="container">
+      <p>© <span id="y"></span> stopgambling.nu • Admin interface</p>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+    
+    // Set today's date as default
+    document.getElementById('article-date').valueAsDate = new Date();
+    
+    document.getElementById('article-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      generateJSON();
+    });
+    
+    function generateJSON() {
+      const type = document.getElementById('article-type').value;
+      const title = document.getElementById('article-title').value.trim();
+      const date = document.getElementById('article-date').value;
+      const source = document.getElementById('article-source').value.trim();
+      const summary = document.getElementById('article-summary').value.trim();
+      const url = document.getElementById('article-url').value.trim();
+      
+      // Hide previous messages
+      document.getElementById('success-msg').style.display = 'none';
+      document.getElementById('error-msg').style.display = 'none';
+      
+      // Validate required fields
+      if (!type || !title || !date || !source || !summary || !url) {
+        document.getElementById('error-msg').style.display = 'block';
+        return;
+      }
+      
+      // Create article object
+      const article = {
+        title: title,
+        date: date,
+        source: source,
+        summary: summary,
+        url: url
+      };
+      
+      // Generate JSON output
+      const jsonOutput = JSON.stringify(article, null, 2);
+      const outputDiv = document.getElementById('json-output');
+      
+      outputDiv.textContent = jsonOutput;
+      outputDiv.style.display = 'block';
+      
+      // Show success message
+      document.getElementById('success-msg').style.display = 'block';
+      
+      // Scroll to output
+      outputDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+    
+    function clearForm() {
+      document.getElementById('article-form').reset();
+      document.getElementById('article-date').valueAsDate = new Date();
+      document.getElementById('json-output').style.display = 'none';
+      document.getElementById('success-msg').style.display = 'none';
+      document.getElementById('error-msg').style.display = 'none';
+    }
+    
+    // Copy to clipboard functionality
+    document.addEventListener('click', function(e) {
+      if (e.target.className === 'json-output') {
+        const text = e.target.textContent;
+        navigator.clipboard.writeText(text).then(() => {
+          const originalText = e.target.textContent;
+          e.target.textContent = 'Kopieret! ' + originalText;
+          setTimeout(() => {
+            e.target.textContent = originalText;
+          }, 2000);
+        });
+      }
+    });
+  </script>
+</body>
+</html>
