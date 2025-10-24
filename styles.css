@@ -4,6 +4,8 @@
   --bg: #0d1117;
   --bg-gradient-start: #0d1117;
   --bg-gradient-end: #111827;
+  --header-bg: rgba(13, 17, 23, 0.9);
+  --border-color: rgba(255, 255, 255, 0.05);
   --panel: #161b22;
   --text: #fefefe;
   --muted: #9da5b4;
@@ -20,6 +22,8 @@
   --bg: #ffffff;
   --bg-gradient-start: #f8fafc;
   --bg-gradient-end: #e2e8f0;
+  --header-bg: rgba(248, 250, 252, 0.9);
+  --border-color: rgba(31, 41, 55, 0.1);
   --panel: #f8fafc;
   --text: #1f2937;
   --muted: #6b7280;
@@ -85,9 +89,9 @@ a:hover {
 header {
   position: sticky;
   top: 0;
-  background: color-mix(in srgb, var(--bg) 90%, transparent);
+  background: var(--header-bg);
   backdrop-filter: blur(8px);
-  border-bottom: 1px solid color-mix(in srgb, var(--text) 5%, transparent);
+  border-bottom: 1px solid var(--border-color);
   z-index: 50;
   transition: background-color 0.3s ease, border-color 0.3s ease;
 }
