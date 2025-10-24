@@ -85,10 +85,11 @@ a:hover {
 header {
   position: sticky;
   top: 0;
-  background: rgba(13, 17, 23, .9);
+  background: color-mix(in srgb, var(--bg) 90%, transparent);
   backdrop-filter: blur(8px);
-  border-bottom: 1px solid rgba(255, 255, 255, .05);
+  border-bottom: 1px solid color-mix(in srgb, var(--text) 5%, transparent);
   z-index: 50;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .nav {
