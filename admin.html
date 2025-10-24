@@ -3,9 +3,10 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Admin - Tilføj artikler • Stop Gambling</title>
+  <title>Admin - Administrer artikler • Stop Gambling</title>
   
   <link rel="stylesheet" href="styles.css">
+  <script src="articles.js"></script>
   
   <style>
     .admin-form {
@@ -102,6 +103,71 @@
       overflow-x: auto;
       white-space: pre-wrap;
     }
+
+    .admin-article {
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 16px;
+      background: rgba(255,255,255,0.02);
+    }
+    .admin-article.promoted {
+      border-color: var(--accent);
+      background: rgba(34,211,238,0.05);
+    }
+    .admin-controls {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      margin-top: 12px;
+    }
+    .promotion-badge {
+      background: var(--accent);
+      color: var(--bg);
+      padding: 4px 8px;
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: bold;
+    }
+    .promotion-badge.inactive {
+      background: var(--muted);
+    }
+    .toggle-btn {
+      background: none;
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      padding: 6px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 12px;
+    }
+    .toggle-btn:hover {
+      background: var(--accent);
+      color: var(--bg);
+    }
+    .toggle-btn.promoted {
+      background: var(--accent);
+      color: var(--bg);
+    }
+    .admin-tabs {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 24px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .admin-tab {
+      padding: 12px 24px;
+      background: none;
+      border: none;
+      color: var(--muted);
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      transition: all 0.3s ease;
+    }
+    .admin-tab.active {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+    }
   </style>
 </head>
 <body>
@@ -109,26 +175,64 @@
     <div class="container nav">
       <div class="brand"><a href="/" class="logo"><svg width="30" height="30" viewBox="0 0 32 32" style="display: inline-block; margin-right: 8px; vertical-align: middle;"><circle cx="16" cy="16" r="15" fill="#ef4444"/><path d="M8 12 L12 8 L20 8 L24 12 L24 20 L20 24 L12 24 L8 20 Z" fill="#ffffff" opacity="0.9"/><line x1="10" y1="10" x2="22" y2="22" stroke="#ef4444" stroke-width="2" opacity="0.8"/></svg>Stop Gambling</a></div>
       <nav class="links" aria-label="Navigation">
-        <a class="bt ghost" href="/presse.html">Tilbage til Presse</a>
+        <a class="bt ghost" href="/presse.html">Presse</a>
         <a class="bt ghost" href="/">Forside</a>
       </nav>
     </div>
   </header>
 
   <main class="container" style="padding: 50px 0;">
-    <h1>Tilføj nye artikler</h1>
+    <h1>🔧 Admin Panel</h1>
     
-    <div class="instructions">
-      <h3>📝 Sådan tilføjer du artikler:</h3>
-      <ol>
-        <li>Udfyld formularen nedenfor med artikeloplysninger</li>
-        <li>Klik "Generer JSON" for at se den formaterede data</li>
-        <li>Kopier JSON-outputtet og tilføj det til <code>articles.json</code> filen</li>
-        <li>Gem filen og genindlæs pressesiden for at se den nye artikel</li>
-      </ol>
-      
-      <p><strong>Tip:</strong> Artikler vises i den rækkefølge de står i JSON-filen. Nye artikler skal placeres øverst for at vise som "seneste nyheder".</p>
+    <div class="admin-tabs">
+      <button class="admin-tab active" onclick="showTab('promotions')">Fremhæv artikler</button>
+      <button class="admin-tab" onclick="showTab('add-article')">Tilføj artikel</button>
     </div>
+
+    <!-- Promotions Tab -->
+    <div id="promotions-tab" class="tab-content">
+      <div class="instructions">
+        <h3>📢 Fremhæv artikler på forsiden</h3>
+        <p>Klik på "Fremhæv artikel" eller "Fjern fremhævning" for at styre hvilke artikler der vises på forsiden. Fremhævede artikler får et blåt banner og vises i "Seneste nyheder" sektionen.</p>
+        <p><strong>Tip:</strong> Efter ændringer skal du kopiere den opdaterede JSON konfiguration og gemme den i articles.json filen.</p>
+      </div>
+
+      <div class="admin-form" style="margin-bottom: 30px;">
+        <h3>📄 Eksporter konfiguration</h3>
+        <p style="margin: 0 0 12px; font-size: 14px;">Kopier nedenstående JSON til articles.json filen for at gemme ændringerne:</p>
+        <button onclick="exportConfig()" class="bt ghost">Vis JSON konfiguration</button>
+        <textarea id="config-export" style="width: 100%; height: 200px; margin-top: 12px; display: none; font-family: monospace; font-size: 12px; background: var(--bg); border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; padding: 8px;"></textarea>
+      </div>
+
+      <div class="admin-form">
+        <h3>📰 Nyheder</h3>
+        <div id="admin-nyheder-container">
+          <!-- News articles will be loaded here -->
+        </div>
+      </div>
+
+      <div class="admin-form">
+        <h3>📋 Dokumenter</h3>
+        <div id="admin-dokumenter-container">
+          <!-- Documents will be loaded here -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Add Article Tab -->
+    <div id="add-article-tab" class="tab-content" style="display: none;">
+      <div class="instructions">
+        <h3>📝 Sådan tilføjer du artikler:</h3>
+        <ol>
+          <li>Udfyld formularen nedenfor med artikeloplysninger</li>
+          <li>Vælg om artiklen skal fremhæves på forsiden</li>
+          <li>Klik "Generer JSON" for at se den formaterede data</li>
+          <li>Kopier JSON-outputtet og tilføj det til <code>articles.json</code> filen</li>
+          <li>Gem filen og genindlæs siden for at se den nye artikel</li>
+        </ol>
+        
+        <p><strong>Tip:</strong> Artikler vises i den rækkefølge de står i JSON-filen. Nye artikler skal placeres øverst for at vise som "seneste nyheder".</p>
+      </div>
 
     <div class="admin-form">
       <div class="success-message" id="success-msg">
@@ -174,6 +278,13 @@
           <input type="url" id="article-url" placeholder="https://..." required />
         </div>
 
+        <div class="form-group">
+          <label for="article-promoted">
+            <input type="checkbox" id="article-promoted" style="width: auto; margin-right: 8px;" />
+            Fremhæv artikel på forsiden
+          </label>
+        </div>
+
         <div class="form-actions">
           <button type="button" class="bt ghost" onclick="clearForm()">Ryd formular</button>
           <button type="submit" class="bt primary">Generer JSON</button>
@@ -194,7 +305,8 @@
       "date": "2025-10-24",
       "source": "Kilde navn",
       "summary": "Artikel sammendrag...",
-      "url": "https://link-til-artikel"
+      "url": "https://link-til-artikel",
+      "promoted": true
     }
   ],
   "dokumenter": [
@@ -208,8 +320,10 @@
         <li><strong>Tilføj nye artikler øverst</strong> i det relevante array (nyheder eller dokumenter)</li>
         <li><strong>Husk komma</strong> efter hver artikel objekt (undtagen den sidste)</li>
         <li><strong>Brug korrekt datoformat</strong>: YYYY-MM-DD (f.eks. 2025-10-24)</li>
+        <li><strong>promoted felt</strong>: true for fremhævede artikler, false for normale</li>
         <li><strong>Test altid</strong> at JSON syntaxen er korrekt efter redigering</li>
       </ul>
+    </div>
     </div>
   </main>
 
@@ -229,6 +343,96 @@
       e.preventDefault();
       generateJSON();
     });
+
+    // Admin Manager for handling promotions
+    class AdminManager extends ArticleManager {
+      constructor() {
+        super();
+      }
+
+      renderArticles() {
+        if (!this.articles) return;
+
+        // Render admin interface for news
+        const nyhedContainer = document.getElementById('admin-nyheder-container');
+        if (nyhedContainer && this.articles.nyheder) {
+          nyhedContainer.innerHTML = this.articles.nyheder.map((article, index) => 
+            this.createAdminArticleHTML(article, 'nyheder', index)
+          ).join('');
+        }
+
+        // Render admin interface for documents
+        const dokumentContainer = document.getElementById('admin-dokumenter-container');
+        if (dokumentContainer && this.articles.dokumenter) {
+          dokumentContainer.innerHTML = this.articles.dokumenter.map((article, index) => 
+            this.createAdminArticleHTML(article, 'dokumenter', index)
+          ).join('');
+        }
+      }
+
+      createAdminArticleHTML(article, type, index) {
+        const isPromoted = article.promoted || false;
+        return `
+          <div class="admin-article ${isPromoted ? 'promoted' : ''}">
+            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+              <span class="promotion-badge ${isPromoted ? '' : 'inactive'}">${isPromoted ? 'FREMHÆVET' : 'NORMAL'}</span>
+              <span style="color: var(--muted); font-size: 14px;">${this.formatDate(article.date)} • ${article.source}</span>
+            </div>
+            <h3 style="color: var(--accent2); margin: 0 0 8px; font-size: 16px;">${article.title}</h3>
+            <p style="margin: 0 0 12px; font-size: 14px; line-height: 1.4;">${article.summary}</p>
+            <div class="admin-controls">
+              <button 
+                class="toggle-btn ${isPromoted ? 'promoted' : ''}" 
+                onclick="toggleArticlePromotion('${type}', ${index})"
+              >
+                ${isPromoted ? 'Fjern fremhævning' : 'Fremhæv artikel'}
+              </button>
+              <a href="${article.url}" target="_blank" rel="noopener" class="bt ghost" style="font-size: 12px; padding: 4px 8px;">Se artikel</a>
+            </div>
+          </div>
+        `;
+      }
+    }
+
+    // Tab management
+    function showTab(tabName) {
+      // Hide all tabs
+      document.getElementById('promotions-tab').style.display = 'none';
+      document.getElementById('add-article-tab').style.display = 'none';
+      
+      // Remove active class from all tab buttons
+      document.querySelectorAll('.admin-tab').forEach(tab => tab.classList.remove('active'));
+      
+      // Show selected tab and mark button as active
+      if (tabName === 'promotions') {
+        document.getElementById('promotions-tab').style.display = 'block';
+        document.querySelector('.admin-tab').classList.add('active');
+      } else if (tabName === 'add-article') {
+        document.getElementById('add-article-tab').style.display = 'block';
+        document.querySelectorAll('.admin-tab')[1].classList.add('active');
+      }
+    }
+
+    // Global functions for the admin interface
+    window.toggleArticlePromotion = function(type, index) {
+      if (window.adminManager && window.adminManager.togglePromotion(type, index)) {
+        console.log(`Toggled promotion for ${type}[${index}]`);
+      }
+    };
+
+    window.exportConfig = function() {
+      const textarea = document.getElementById('config-export');
+      if (window.adminManager && window.adminManager.articles) {
+        textarea.value = JSON.stringify(window.adminManager.articles, null, 2);
+        textarea.style.display = 'block';
+        textarea.select();
+      }
+    };
+
+    // Initialize admin manager
+    document.addEventListener('DOMContentLoaded', () => {
+      window.adminManager = new AdminManager();
+    });
     
     function generateJSON() {
       const type = document.getElementById('article-type').value;
@@ -237,6 +441,7 @@
       const source = document.getElementById('article-source').value.trim();
       const summary = document.getElementById('article-summary').value.trim();
       const url = document.getElementById('article-url').value.trim();
+      const promoted = document.getElementById('article-promoted').checked;
       
       // Hide previous messages
       document.getElementById('success-msg').style.display = 'none';
@@ -254,7 +459,8 @@
         date: date,
         source: source,
         summary: summary,
-        url: url
+        url: url,
+        promoted: promoted
       };
       
       // Generate JSON output

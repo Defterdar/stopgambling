@@ -14,6 +14,7 @@
   
   <link rel="stylesheet" href="styles.css">
   <script src="theme.js"></script>
+  <script src="articles.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded',function(){
       document.addEventListener('keydown',function(e){ if(e.key==='Escape') location.href='https://www.wikipedia.org';});
@@ -78,6 +79,16 @@
           <h3>Reklamer overalt</h3>
           <p>Influencere og spil-lignende apps normaliserer betting for unge. Jo tidligere, jo sværere at stoppe.</p>
         </article>
+      </div>
+    </section>
+
+    <section class="container" id="promoted-articles-section">
+      <h2 style="text-align: center; margin-bottom: 32px; color: var(--accent2);">📢 Seneste nyheder</h2>
+      <div id="promoted-articles-container">
+        <!-- Promoted articles will be loaded here by JavaScript -->
+      </div>
+      <div style="text-align: center; margin-top: 24px;">
+        <a class="bt ghost" href="/presse.html">Se alle nyheder og artikler</a>
       </div>
     </section>
   </main>
