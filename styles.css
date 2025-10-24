@@ -2,6 +2,8 @@
 :root {
   /* Dark theme (default) */
   --bg: #0d1117;
+  --bg-gradient-start: #0d1117;
+  --bg-gradient-end: #111827;
   --panel: #161b22;
   --text: #fefefe;
   --muted: #9da5b4;
@@ -16,6 +18,8 @@
 /* Light theme */
 :root.light-theme {
   --bg: #ffffff;
+  --bg-gradient-start: #f8fafc;
+  --bg-gradient-end: #e2e8f0;
   --panel: #f8fafc;
   --text: #1f2937;
   --muted: #6b7280;
@@ -35,8 +39,9 @@ html {
   margin: 0;
   min-height: 100%;
   scroll-behavior: smooth;
-  background: linear-gradient(160deg, #0d1117 0%, #111827 100%);
+  background: linear-gradient(160deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
   background-attachment: fixed;
+  transition: background 0.3s ease;
 }
 
 body {
